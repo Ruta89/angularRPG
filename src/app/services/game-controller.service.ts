@@ -36,12 +36,7 @@ export class GameControllerService {
   availableHeros: Hero[] = [];
   enemyParty: Monster[] = this.currentChapter.enemyParty;
 
-  setMainCharacter(character: {
-    name: string;
-    class: ClassOptions;
-    race: RaceOptions;
-    gender: GenderOptions;
-  }) {
+  setMainCharacter(character) {
     switch (character.class) {
       case ClassOptions.warrior:
         this.mainCharacter = new Warrior(
