@@ -1,9 +1,3 @@
-import {
-  ClassOptions,
-  RaceOptions,
-  GenderOptions,
-  CharacterOptions
-} from './../models/character-options';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -20,7 +14,12 @@ import {
 } from './../models/characters';
 import { Chapter, SuccessOptions } from './../models/chapter';
 import { Chapter1 } from '../chapters/Chapter1';
-
+import {
+  ClassOptions,
+  RaceOptions,
+  GenderOptions,
+  CharacterOptions
+} from './../models/character-options';
 @Injectable()
 export class GameControllerService {
   constructor(private router: Router) {}

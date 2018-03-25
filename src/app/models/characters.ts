@@ -140,7 +140,7 @@ export class Hero extends BaseCharacter {
   availableSkillPoints: number;
   hasTrapDefence: boolean;
   hasDamagingTrap: boolean;
-  turnsUntilSPecialAvailableAgain: number;
+  turnsUntilSpecialAvailableAgain: number;
 
   constructor(name, gender, race, level, health, skills, weapon, armor) {
     super(name, health, skills);
@@ -176,7 +176,7 @@ export class Hero extends BaseCharacter {
   rest(): void {
     this.currentHealth = this.maxHealth;
     this.isIncapacitated = false;
-    this.turnsUntilSPecialAvailableAgain = 0;
+    this.turnsUntilSpecialAvailableAgain = 0;
   }
 }
 
