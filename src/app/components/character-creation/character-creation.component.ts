@@ -15,8 +15,8 @@ export class CharacterCreationComponent implements OnInit {
   constructor(private gameControllerService: GameControllerService) {}
 
   character = {
-    race: '--Choose--',
-    class: '--Choose--',
+    race: '--Wybierz--',
+    class: '--Wybierz--',
     gender: undefined,
     name: undefined
   };
@@ -50,8 +50,8 @@ export class CharacterCreationComponent implements OnInit {
 
   checkCompleted() {
     this.characterComplete =
-      this.character.race !== '--Choose--' &&
-      this.character.class !== '--Choose--' &&
+      this.character.race !== '--Wybierz--' &&
+      this.character.class !== '--Wybierz--' &&
       this.character.gender &&
       this.character.name;
   }

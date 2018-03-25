@@ -13,8 +13,8 @@ export enum ClassOptions {
 }
 
 export enum GenderOptions {
-  male = 'Male',
-  female = 'Female'
+  male = 'Mezczyzna',
+  female = 'Kobieta'
 }
 
 export const CharacterOptions = {

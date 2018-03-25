@@ -27,10 +27,10 @@ export class Weapon {
 }
 
 export enum CharacterSkills {
-  attack = 'attack',
-  sneak = 'sneak',
-  persuade = 'persuade',
-  intelligence = 'inteligence'
+  attack = 'atak',
+  sneak = 'skradanie',
+  persuade = 'namawianie',
+  intelligence = 'inteligencja'
 }
 
 export enum FightOptions {
