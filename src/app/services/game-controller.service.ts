@@ -1,9 +1,3 @@
-import {
-  ClassOptions,
-  RaceOptions,
-  GenderOptions,
-  CharacterOptions
-} from './../models/character-options';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -20,7 +14,12 @@ import {
 } from './../models/characters';
 import { Chapter, SuccessOptions } from './../models/chapter';
 import { Chapter1 } from '../chapters/Chapter1';
-
+import {
+  ClassOptions,
+  RaceOptions,
+  GenderOptions,
+  CharacterOptions
+} from './../models/character-options';
 @Injectable()
 export class GameControllerService {
   constructor(private router: Router) {}
@@ -99,7 +98,7 @@ export class GameControllerService {
       switch (reward) {
         case SuccessOptions.rewardExperience:
           messages.push(
-            `Each mmember z towiego party otrzymalo ${
+            `każdy członek twojej drużyny otrzymal ${
               this.currentChapter.rewards.experience
             } doswiadczenia.`
           );
@@ -109,14 +108,14 @@ export class GameControllerService {
               messages.push(
                 ` ${
                   hero.name
-                }  podnosi level! Uprade their stats on the inventory screen.`
+                }  podnosi level! Uaktualnij swoje statystyki na ekranie zasobów.`
               );
               hero.levelUp();
             }
           });
           break;
         case SuccessOptions.rewardEquipment:
-          messages.push('You received the following equipment: ');
+          messages.push('Otrzymałeś następujący sprzęt: ');
           this.currentChapter.rewards.equipment.forEach(equipment => {
             if (equipment instanceof Armor) {
               messages.push(
@@ -139,16 +138,16 @@ export class GameControllerService {
           const newHero: Hero = this.currentChapter.rewards.newHero;
           if (this.heroParty.length < 3) {
             messages.push(
-              `A new hero joined your party! ${newHero.name} - ${
+              `Nowy bohater dołączył do twojej drużyny!${newHero.name} - ${
                 newHero.characterRole
               } - lvl ${newHero.level} `
             );
             this.heroParty.push(newHero);
           } else {
             messages.push(
-              `A new hero is available to join your party! ${newHero.name} - ${
-                newHero.characterRole
-              } - lvl ${newHero.level} `
+              ` Nowy bohater jest dostępny, aby dołączyć do drużyny! ${
+                newHero.name
+              } - ${newHero.characterRole} - lvl ${newHero.level} `
             );
             this.availableHeros.push(newHero);
           }

@@ -1,10 +1,10 @@
 import { Hero, Monster, Weapon, Armor } from './characters';
 
 export enum CharacterAction {
-  attack = 'Attack',
-  sneak = 'sneak',
-  persuade = 'Persuade',
-  doNothing = 'Do Nothing'
+  attack = 'Atak',
+  sneak = 'Skradanie',
+  persuade = 'Namawianie',
+  doNothing = 'Nic nie rob'
 }
 
 export enum FailureOptions {

@@ -14,8 +14,11 @@ import {
 
 export const Chapter1: Chapter = {
   story: [
-    `klsjdgsdkljgsdkj sjkklj;lj gfskljlkjklsd s`,
-    `klsjdgsdkljgsdkj sjkklj;lj gfskljlkjklsd s`
+    `Wchodzisz do lasu, ścigając goblina, który ukradł miecz twojego ojca.
+     Tracisz ich z oczu w gęstym lesie i zaczynasz skradać się do przodu, opierając się na uszach,
+     aby ogrzać cię z niebezpieczeństw i, miejmy nadzieję, zlokalizować opiekuńczego goblina.`,
+
+    `Pojawiają się Shenanigans i zaczyna się spotkanie. Teraz pytanie brzmi: jak chcesz sobie z tym poradzić?`
   ],
   options: [
     CharacterAction.attack,
@@ -42,7 +45,7 @@ export const Chapter1: Chapter = {
   ],
   rewards: {
     experience: 500,
-    equipment: [new Weapon('Rusty Sword', 1, 6)],
+    equipment: [new Weapon('Zardzewiały miecz', 1, 6)], // Rusty sword
     newHero: new Warrior(
       'Benjamin',
       GenderOptions.male,
@@ -50,8 +53,8 @@ export const Chapter1: Chapter = {
       1,
       10,
       { attack: 2, sneak: 1, persuade: 1, intelligence: 1 },
-      new Weapon('Dagger', 1, 4),
-      new Armor('Clothes', 0)
+      new Weapon('Sztylet', 1, 4), // dagger
+      new Armor('Ubrania', 0) // Clothes
     )
   },
   nextChapter: null

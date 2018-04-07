@@ -24,7 +24,7 @@
   background: rgb(0, 0, 150);
 }
 
-.gender-buttion {
+.gender-button {
   cursor: pointer;
   display: block;
   background-color: black;
@@ -33,7 +33,7 @@
   width: 50px;
   font-size: 30px;
 }
-.gender-buttion.active {
+.gender-button.active {
   background: rgb(0, 0, 150);
 }
 
