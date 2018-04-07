@@ -112,10 +112,7 @@ export class FightComponent implements OnInit {
   }
 
   tryAttack(target: BaseCharacter) {
-    console.log('try Attack');
-    console.log(target);
-
-    if (this.freezeActions) {
+    if (this.freezeActions && this.heroTurn) {
       return;
     }
     if (target.isIncapacitated) {
@@ -187,7 +184,9 @@ export class FightComponent implements OnInit {
       this.displayMessage = `Only enemies can be targeted for a warrior special`;
       return;
     }
+
     this.selectedTargets.push(target);
+
     if (this.selectedTargets.length < 2) {
       this.displayMessage = `Select a second target for uour warrior;s special attack`;
     } else if (this.currentCharacter instanceof Hero) {
@@ -267,25 +266,26 @@ export class FightComponent implements OnInit {
   }
 
   rougeSpecialAttack(target: BaseCharacter, upgraded: boolean) {
-    if (!(target instanceof Hero)) {
-      this.displayMessage = `Onsly a hero can be targeted for a rangers special attack`;
+    if (!(target instanceof Monster)) {
+      this.displayMessage = `Only a hero can be targeted for a rangers special attack`;
       return;
     }
-    if (target.hasTrapDefence) {
-      this.displayMessage = `Target hero already has a trap degfense in place`;
-      return;
-    }
+    // if (target.hasTrapDefence) {
+    //   this.displayMessage = `Target hero already has a trap degfense in place`;
+    //   return;
+    // }
     this.freezeActions = true;
     if (this.currentCharacter instanceof Hero) {
-      this.currentCharacter.turnsUntilSpecialAvailableAgain =
-        this.turnsBetweenSpecial - 1;
+      this.currentCharacter.turnsUntilSpecialAvailableAgain = this.turnsBetweenSpecial;
     }
 
-    this.displayMessage = ` ${
-      this.currentCharacter.name
-    } set up a trap to protect ${target.name} `;
-    target.hasTrapDefence = true;
-    target.hasDamagingTrap = upgraded;
+    target.isStrongPoison = upgraded;
+    target.poisonStacks++;
+
+    this.displayMessage = ` ${target.name} was poisoned . (${
+      target.poisonStacks
+    } stack(s).`;
+
     setTimeout(() => {
       this.nextTurn();
     }, this.actionDelay);
@@ -296,24 +296,65 @@ export class FightComponent implements OnInit {
       this.displayMessage = `Onsly a hero can be targeted for a rangers special attack`;
       return;
     }
-    if (target.hasTrapDefence) {
-      this.displayMessage = `Target hero already has a trap degfense in place`;
-      return;
-    }
-    this.freezeActions = true;
-    if (this.currentCharacter instanceof Hero) {
-      this.currentCharacter.turnsUntilSpecialAvailableAgain =
-        this.turnsBetweenSpecial - 1;
-    }
+    if (upgraded) {
+      this.selectedTargets.push(target);
 
-    this.displayMessage = ` ${
-      this.currentCharacter.name
-    } set up a trap to protect ${target.name} `;
-    target.hasTrapDefence = true;
-    target.hasDamagingTrap = upgraded;
-    setTimeout(() => {
-      this.nextTurn();
-    }, this.actionDelay);
+      if (this.selectedTargets.length < 2) {
+        this.displayMessage = `Select a second target to heal.`;
+        return;
+      }
+      this.freezeActions = true;
+      if (this.currentCharacter instanceof Hero) {
+        this.currentCharacter.turnsUntilSpecialAvailableAgain = this.turnsBetweenSpecial;
+      }
+      const heal1 =
+        Math.floor(Math.random() * 6) +
+        1 +
+        this.currentCharacter.skills.intelligence;
+      const heal2 =
+        Math.floor(Math.random() * 6) +
+        1 +
+        this.currentCharacter.skills.intelligence;
+      const target1 = this.selectedTargets[0];
+      const target2 = this.selectedTargets[1];
+
+      target1.currentHealth =
+        target1.currentHealth + heal1 > target1.maxHealth
+          ? target1.maxHealth
+          : target1.currentHealth + heal1;
+      this.displayMessage = `${target1.name} was healed for ${heal1} health.`;
+
+      setTimeout(() => {
+        target2.currentHealth =
+          target2.currentHealth + heal2 > target2.maxHealth
+            ? target2.maxHealth
+            : target2.currentHealth + heal2;
+        this.displayMessage = `${target2.name} was healed for ${heal2} health.`;
+        this.selectedTargets = [];
+        setTimeout(() => {
+          this.nextTurn();
+        }, this.actionDelay);
+      }, this.actionDelay);
+    } else {
+      this.freezeActions = true;
+      if (this.currentCharacter instanceof Hero) {
+        this.currentCharacter.turnsUntilSpecialAvailableAgain = this.turnsBetweenSpecial;
+        const healing =
+          Math.floor(Math.random() * 6) +
+          1 +
+          this.currentCharacter.skills.intelligence;
+        target.currentHealth =
+          target.currentHealth + healing > target.maxHealth
+            ? target.maxHealth
+            : target.currentHealth + healing;
+        this.displayMessage = `${
+          target.name
+        }  was healed for ${healing} health.`;
+        setTimeout(() => {
+          this.nextTurn();
+        }, this.actionDelay);
+      }
+    }
   }
 
   attack(target: BaseCharacter) {
@@ -381,18 +422,16 @@ export class FightComponent implements OnInit {
         this.currentCharacter.isIncapacitated = true;
         this.enemiesIncapacitated++;
       }
-      setTimeout(
-        function() {
-          this.checkIfWin();
-        }.bind(this),
-        this.actionDelay
-      );
+      setTimeout(() => {
+        this.checkIfWin();
+      }, this.actionDelay);
       return;
     }
     if (
       this.currentCharacter instanceof Monster &&
       this.currentCharacter.hasTakenPoisonDamageThisTurn
     ) {
+      this.currentCharacter.hasTakenPoisonDamageThisTurn = false;
     }
 
     this.availableTargets = Teams.none;
@@ -435,6 +474,13 @@ export class FightComponent implements OnInit {
       this.currentCharacter instanceof Monster &&
       this.currentCharacter.isTrapped
     ) {
+      this.currentCharacter.isTrapped = false;
+      this.displayMessage = ` ${
+        this.currentCharacter.name
+      } freed itself form the ..`;
+      setTimeout(() => {
+        this.nextTurn();
+      }, this.actionDelay);
     } else {
       let target: Hero;
       this.selectedAction = FightOptions.attack;
