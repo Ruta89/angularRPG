@@ -220,7 +220,7 @@ export class Ranger extends Hero {
     super.levelUp();
   }
 }
-export class Rouge extends Hero {
+export class Rogue extends Hero {
   constructor(name, gender, race, level, health, skills, weapon, armor) {
     super(name, gender, race, level, health, skills, weapon, armor);
     this.characterRole = ClassOptions.warrior;
@@ -230,8 +230,8 @@ export class Rouge extends Hero {
     this.skills.intelligence--;
     this.spriteUrl =
       this.gender === GenderOptions.male
-        ? './assets/rouge.jpg'
-        : './assets/rouge.jpg';
+        ? './assets/rogue.jpg'
+        : './assets/rogue.jpg';
   }
 
   levelUp(): void {
@@ -250,8 +250,8 @@ export class Priest extends Hero {
     this.skills.intelligence += 2;
     this.spriteUrl =
       this.gender === GenderOptions.male
-        ? './assets/priest.jpg'
-        : './assets/priest.jpg';
+        ? './assets/priest.png'
+        : './assets/priest.png';
   }
 
   levelUp(): void {

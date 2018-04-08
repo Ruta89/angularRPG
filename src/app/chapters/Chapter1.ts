@@ -33,7 +33,7 @@ export const Chapter1: Chapter = {
       { attack: 10, sneak: 10, persuade: 10 },
       1,
       3,
-      '../../assets/goblin.jpg'
+      './assets/goblin.png'
     )
   ],
   sneakPersuadeFail: CharacterAction.attack,
