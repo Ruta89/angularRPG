@@ -190,8 +190,8 @@ export class Warrior extends Hero {
     this.skills.intelligence--;
     this.spriteUrl =
       this.gender === GenderOptions.male
-        ? './assets/warrior.jpg'
-        : './assets/warrior.jpg';
+        ? './assets/warrior.png'
+        : './assets/warrior.png';
   }
 
   levelUp(): void {
@@ -210,8 +210,8 @@ export class Ranger extends Hero {
     this.skills.intelligence++;
     this.spriteUrl =
       this.gender === GenderOptions.male
-        ? './assets/ranger.jpg'
-        : './assets/ranger.jpg';
+        ? './assets/ranger.png'
+        : './assets/ranger.png';
   }
 
   levelUp(): void {
@@ -230,8 +230,8 @@ export class Rogue extends Hero {
     this.skills.intelligence--;
     this.spriteUrl =
       this.gender === GenderOptions.male
-        ? './assets/rogue.jpg'
-        : './assets/rogue.jpg';
+        ? './assets/rogue.png'
+        : './assets/rogue.png';
   }
 
   levelUp(): void {
