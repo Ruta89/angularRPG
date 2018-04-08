@@ -1,6 +1,6 @@
 {
-  "name": "angularRPG",
-  "version": "0.0.3",
+  "name": "arekRPG",
+  "version": "0.0.5",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
