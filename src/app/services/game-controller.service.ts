@@ -98,9 +98,9 @@ export class GameControllerService {
       switch (reward) {
         case SuccessOptions.rewardExperience:
           messages.push(
-            `każdy członek twojej drużyny otrzymal ${
+            ` każdy członek twojej drużyny otrzymal ${
               this.currentChapter.rewards.experience
-            } doswiadczenia.`
+            } doswiadczenia. `
           );
           this.heroParty.forEach(hero => {
             hero.experience += this.currentChapter.rewards.experience;
@@ -108,14 +108,14 @@ export class GameControllerService {
               messages.push(
                 ` ${
                   hero.name
-                }  podnosi level! Uaktualnij swoje statystyki na ekranie zasobów.`
+                }  podnosi level! Uaktualnij swoje statystyki na ekranie zasobów. `
               );
               hero.levelUp();
             }
           });
           break;
         case SuccessOptions.rewardEquipment:
-          messages.push('Otrzymałeś następujący sprzęt: ');
+          messages.push(' Otrzymałeś następujący sprzęt: ');
           this.currentChapter.rewards.equipment.forEach(equipment => {
             if (equipment instanceof Armor) {
               messages.push(
@@ -125,9 +125,9 @@ export class GameControllerService {
               );
             } else {
               messages.push(
-                ` ${equipment.name} -- Min Damage: ${
+                ` ${equipment.name} -- Min. Obrażenia: ${
                   equipment.minDamage
-                },  -- Max Damage: ${equipment.maxDamage} `
+                },  -- Max. Obrażenia: ${equipment.maxDamage} `
               );
             }
 
@@ -138,7 +138,7 @@ export class GameControllerService {
           const newHero: Hero = this.currentChapter.rewards.newHero;
           if (this.heroParty.length < 3) {
             messages.push(
-              `Nowy bohater dołączył do twojej drużyny!${newHero.name} - ${
+              ` Nowy bohater dołączył do twojej drużyny! ${newHero.name} - ${
                 newHero.characterRole
               } - lvl ${newHero.level} `
             );

@@ -63,7 +63,7 @@ export class FightComponent implements OnInit {
   ngOnInit() {}
 
   selectOption(selectedOption: FightOptions) {
-    console.log('select option: ', selectedOption);
+    console.log('wybierz opcje: ', selectedOption);
     if (this.freezeActions && this.heroTurn) {
       return;
     }
@@ -97,7 +97,7 @@ export class FightComponent implements OnInit {
         }
         if (this.currentCharacter instanceof Ranger) {
           this.availableTargets = Teams.heroes;
-          this.displayMessage = `Ustaw trap to ptotect one of your bohater ...`;
+          this.displayMessage = `Ustaw pulapke by ochronic jednego z twoich bochaterow`;
         }
         if (this.currentCharacter instanceof Rogue) {
           this.availableTargets = Teams.enemies;
@@ -105,7 +105,7 @@ export class FightComponent implements OnInit {
         }
         if (this.currentCharacter instanceof Priest) {
           this.availableTargets = Teams.heroes;
-          this.displayMessage = `Wybrajafdsljhl ...`;
+          this.displayMessage = `Wybrajafdsljhl Ksiedza`;
         }
       }
     }
@@ -116,7 +116,7 @@ export class FightComponent implements OnInit {
       return;
     }
     if (target.isIncapacitated) {
-      this.displayMessage = 'That target is already incapacitated.';
+      this.displayMessage = 'Ten cel jest już obezwładniony.';
       return;
     }
 
@@ -127,17 +127,17 @@ export class FightComponent implements OnInit {
         if (target.hasDamagingTrap) {
           const damage = Math.floor(Math.random() * 8) + 1;
           this.currentCharacter.currentHealth -= damage;
-          this.displayMessage = ` ${target.name} was protected by a trap. ${
+          this.displayMessage = ` ${target.name} był chroniony przez pułapkę. ${
             this.currentCharacter.name
-          } is stuck in the trap, taking ${damage} damage. `;
+          } utknął w pułapce, zadając  ${damage}  obrażeń. `;
           if (this.currentCharacter.currentHealth <= 0) {
             this.currentCharacter.isIncapacitated = true;
             this.enemiesIncapacitated++;
           }
         } else {
-          this.displayMessage = ` ${target.name} was protected by trap. ${
+          this.displayMessage = ` ${target.name} był chroniony przez pułapkę. ${
             this.currentCharacter.name
-          } is stuck in the trap. `;
+          } utknął w pułapce.`;
         }
 
         target.hasTrapDefence = false;
@@ -175,20 +175,20 @@ export class FightComponent implements OnInit {
         this.priestSpecialAttack(target, upgraded);
       }
     } else {
-      this.displayMessage = 'Please select an action option.';
+      this.displayMessage = 'Wybierz opcję działania.';
     }
   }
 
   warriorSpecialAttack(target: BaseCharacter, upgraded: boolean) {
     if (!(target instanceof Monster)) {
-      this.displayMessage = `Only enemies can be targeted for a warrior special`;
+      this.displayMessage = `Tylko wrogowie mogą być celem specjalnych wojowników.`;
       return;
     }
 
     this.selectedTargets.push(target);
 
     if (this.selectedTargets.length < 2) {
-      this.displayMessage = `Select a second target for uour warrior;s special attack`;
+      this.displayMessage = `Wybierz drugi cel dla swojego specjalnego ataku wojownika`;
     } else if (this.currentCharacter instanceof Hero) {
       this.freezeActions = true;
       this.currentCharacter.turnsUntilSpecialAvailableAgain = this.turnsBetweenSpecial;
@@ -204,23 +204,23 @@ export class FightComponent implements OnInit {
         firstTarget.currentHealth -= damage;
         this.displayMessage = ` ${this.currentCharacter.name} hit ${
           firstTarget.name
-        } dealing ${damage} damage. `;
+        } zadaje ${damage} obrazen. `;
         if (firstTarget.currentHealth <= 0) {
           firstTarget.isIncapacitated = true;
           this.enemiesIncapacitated++;
         }
       } else {
-        this.displayMessage = ` ${this.currentCharacter.name} Missed. `;
+        this.displayMessage = ` ${this.currentCharacter.name} chybił. `;
       }
 
       setTimeout(() => {
-        this.displayMessage = ` ${this.currentCharacter.name} missed.`;
+        this.displayMessage = ` ${this.currentCharacter.name} chybił.`;
         if (secondTarget.currentHealth <= 0) {
           const damage = this.currentCharacter.dealDamage();
           secondTarget.currentHealth -= damage;
-          this.displayMessage = ` ${this.currentCharacter.name} hit ${
+          this.displayMessage = ` ${this.currentCharacter.name} uderza ${
             secondTarget.name
-          } dealing ${damage} damage. `;
+          } zadaje ${damage} obrazen. `;
           if (
             secondTarget.currentHealth <= 0 &&
             !secondTarget.isIncapacitated
@@ -229,7 +229,7 @@ export class FightComponent implements OnInit {
             this.enemiesIncapacitated++;
           }
         } else {
-          this.displayMessage = ` ${this.currentCharacter.name} Missed. `;
+          this.displayMessage = ` ${this.currentCharacter.name} chybil. `;
         }
 
         setTimeout(() => {
@@ -242,11 +242,11 @@ export class FightComponent implements OnInit {
 
   rangerSpecialAttack(target: BaseCharacter, upgraded: boolean) {
     if (!(target instanceof Hero)) {
-      this.displayMessage = `Onsly a hero can be targeted for a rangers special attack`;
+      this.displayMessage = `Tylko bohater może być celem ataku specjalnego`;
       return;
     }
     if (target.hasTrapDefence) {
-      this.displayMessage = `Target hero already has a trap degfense in place`;
+      this.displayMessage = `Docelowy bohater ma już ochronę przed pułapką`;
       return;
     }
     this.freezeActions = true;
@@ -257,7 +257,7 @@ export class FightComponent implements OnInit {
 
     this.displayMessage = ` ${
       this.currentCharacter.name
-    } set up a trap to protect ${target.name} `;
+    }  założyć pułapkę do ochrony ${target.name} `;
     target.hasTrapDefence = true;
     target.hasDamagingTrap = upgraded;
     setTimeout(() => {
@@ -267,7 +267,7 @@ export class FightComponent implements OnInit {
 
   rogueSpecialAttack(target: BaseCharacter, upgraded: boolean) {
     if (!(target instanceof Monster)) {
-      this.displayMessage = `Only a hero can be targeted for a rangers special attack`;
+      this.displayMessage = `Tylko bohater może być celem ataku specjalnego. a2`;
       return;
     }
     // if (target.hasTrapDefence) {
@@ -282,7 +282,7 @@ export class FightComponent implements OnInit {
     target.isStrongPoison = upgraded;
     target.poisonStacks++;
 
-    this.displayMessage = ` ${target.name} was poisoned . (${
+    this.displayMessage = ` ${target.name} zostal zatruty. (${
       target.poisonStacks
     } stack(s).`;
 
@@ -293,14 +293,14 @@ export class FightComponent implements OnInit {
 
   priestSpecialAttack(target: BaseCharacter, upgraded: boolean) {
     if (!(target instanceof Hero)) {
-      this.displayMessage = `Onsly a hero can be targeted for a rangers special attack`;
+      this.displayMessage = `Tylko bohater może być celem ataku specjalnego`;
       return;
     }
     if (upgraded) {
       this.selectedTargets.push(target);
 
       if (this.selectedTargets.length < 2) {
-        this.displayMessage = `Select a second target to heal.`;
+        this.displayMessage = `Wybierz drugi cel do wyleczenia.`;
         return;
       }
       this.freezeActions = true;
@@ -322,14 +322,18 @@ export class FightComponent implements OnInit {
         target1.currentHealth + heal1 > target1.maxHealth
           ? target1.maxHealth
           : target1.currentHealth + heal1;
-      this.displayMessage = `${target1.name} was healed for ${heal1} health.`;
+      this.displayMessage = `${
+        target1.name
+      } został uleczony za  ${heal1} punktów zdrowia. `;
 
       setTimeout(() => {
         target2.currentHealth =
           target2.currentHealth + heal2 > target2.maxHealth
             ? target2.maxHealth
             : target2.currentHealth + heal2;
-        this.displayMessage = `${target2.name} was healed for ${heal2} health.`;
+        this.displayMessage = `${
+          target2.name
+        } został uleczony za ${heal2} punktów zdrowia. a2`;
         this.selectedTargets = [];
         setTimeout(() => {
           this.nextTurn();
@@ -349,7 +353,7 @@ export class FightComponent implements OnInit {
             : target.currentHealth + healing;
         this.displayMessage = `${
           target.name
-        }  was healed for ${healing} health.`;
+        }  został uleczony za  ${healing} punktów zdrowia.`;
         setTimeout(() => {
           this.nextTurn();
         }, this.actionDelay);
@@ -364,7 +368,7 @@ export class FightComponent implements OnInit {
       target.currentHealth -= damage;
       this.displayMessage = ` ${this.currentCharacter.name} uderzyl ${
         target.name
-      } dealing  ${damage} damages. `;
+      } zadajac  ${damage} obrazen. `;
       setTimeout(() => {
         if (target.currentHealth <= 0) {
           target.isIncapacitated = true;
@@ -377,7 +381,7 @@ export class FightComponent implements OnInit {
         }
       }, this.actionDelay);
     } else {
-      this.displayMessage = ` ${this.currentCharacter.name} Missed. `;
+      this.displayMessage = ` ${this.currentCharacter.name} chybił. `;
       setTimeout(() => {
         this.nextTurn();
       }, this.actionDelay);
@@ -387,7 +391,7 @@ export class FightComponent implements OnInit {
   checkIfWin() {
     this.selectedAction = FightOptions.none;
     if (this.enemiesIncapacitated === this.enemyParty.length) {
-      this.displayMessage = `All enemies have been; defeated!`;
+      this.displayMessage = `Wszyscy wrogowie byli; pokonany!`;
       this.successMessages = this.gameControllerService.encounterSuccess();
       this.showNextChapterButton = true;
       this.gameControllerService.isFighting = false;
@@ -395,7 +399,7 @@ export class FightComponent implements OnInit {
     }
 
     if (this.heroesIncapacitated === this.heroParty.length) {
-      this.displayMessage = 'All heroes have been defeated!';
+      this.displayMessage = 'Wszyscy bohaterowie zostali pokonani!';
       this.showGameOverButton = true;
       this.gameControllerService.isFighting = false;
       return;
@@ -417,7 +421,7 @@ export class FightComponent implements OnInit {
       this.currentCharacter.currentHealth -= poisonDamage;
       this.displayMessage = ` ${
         this.currentCharacter.name
-      } took ${poisonDamage} poison `;
+      } wzial ${poisonDamage} trucizn `;
       if (this.currentCharacter.currentHealth <= 0) {
         this.currentCharacter.isIncapacitated = true;
         this.enemiesIncapacitated++;
@@ -448,7 +452,7 @@ export class FightComponent implements OnInit {
     if (nextCharacter) {
       if (!nextCharacter.isIncapacitated) {
         this.currentCharacter = nextCharacter;
-        this.displayMessage = ` It's ${this.currentCharacter.name}'s turn.`;
+        this.displayMessage = `Kolej na ${this.currentCharacter.name} ruch.`;
         if (this.currentCharacter instanceof Hero) {
           this.freezeActions = false;
           if (this.currentCharacter.turnsUntilSpecialAvailableAgain) {
@@ -475,9 +479,7 @@ export class FightComponent implements OnInit {
       this.currentCharacter.isTrapped
     ) {
       this.currentCharacter.isTrapped = false;
-      this.displayMessage = ` ${
-        this.currentCharacter.name
-      } freed itself form the ..`;
+      this.displayMessage = ` ${this.currentCharacter.name} uwolnił się  `;
       setTimeout(() => {
         this.nextTurn();
       }, this.actionDelay);
