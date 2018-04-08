@@ -1,6 +1,6 @@
 {
-  "name": "angular-rpg",
-  "version": "0.0.2",
+  "name": "angularRPG",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -23,7 +23,7 @@
     "@angular/router": "5.2.9",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.8",
-    "zone.js": "^0.8.25"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular/cli": "1.7.4",
