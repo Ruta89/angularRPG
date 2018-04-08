@@ -8,7 +8,7 @@ import {
   FightOptions,
   Warrior,
   Ranger,
-  Rouge,
+  Rogue,
   Priest
 } from '../../models/characters';
 
@@ -99,7 +99,7 @@ export class FightComponent implements OnInit {
           this.availableTargets = Teams.heroes;
           this.displayMessage = `Ustaw trap to ptotect one of your bohater ...`;
         }
-        if (this.currentCharacter instanceof Rouge) {
+        if (this.currentCharacter instanceof Rogue) {
           this.availableTargets = Teams.enemies;
           this.displayMessage = `Trucizna ...`;
         }
@@ -168,8 +168,8 @@ export class FightComponent implements OnInit {
       if (this.currentCharacter instanceof Ranger) {
         this.rangerSpecialAttack(target, upgraded);
       }
-      if (this.currentCharacter instanceof Rouge) {
-        this.rougeSpecialAttack(target, upgraded);
+      if (this.currentCharacter instanceof Rogue) {
+        this.rogueSpecialAttack(target, upgraded);
       }
       if (this.currentCharacter instanceof Priest) {
         this.priestSpecialAttack(target, upgraded);
@@ -265,7 +265,7 @@ export class FightComponent implements OnInit {
     }, this.actionDelay);
   }
 
-  rougeSpecialAttack(target: BaseCharacter, upgraded: boolean) {
+  rogueSpecialAttack(target: BaseCharacter, upgraded: boolean) {
     if (!(target instanceof Monster)) {
       this.displayMessage = `Only a hero can be targeted for a rangers special attack`;
       return;

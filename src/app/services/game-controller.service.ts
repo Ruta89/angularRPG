@@ -6,7 +6,7 @@ import {
   Weapon,
   Monster,
   Ranger,
-  Rouge,
+  Rogue,
   Priest,
   Warrior,
   checkRace,
@@ -62,7 +62,7 @@ export class GameControllerService {
         );
         break;
       case ClassOptions.rogue:
-        this.mainCharacter = new Rouge(
+        this.mainCharacter = new Rogue(
           character.name,
           character.gender,
           character.race,
