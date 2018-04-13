@@ -1,11 +1,13 @@
 {
   "name": "arekRPG",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "pwa":
+      "ng build --prod --base-href 'https://ruta89.github.io/angularRPG/' && firebase deploy && angular-cli-ghpages ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
